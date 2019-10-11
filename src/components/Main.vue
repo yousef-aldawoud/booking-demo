@@ -1,5 +1,11 @@
 <template>
   <b-container >
+      <div v-if="!set">
+          <b-button @click="setConf(true)">Color</b-button>
+          <b-button @click="setConf(false)">No color</b-button>
+      </div>
+      <div v-else>
+
       <booking-dialog v-on:add-booking="addItem" v-on:edit-booking="doEditItem" ref="booking_model" :colored="colored"></booking-dialog>
       <b-button @click="openDialog" class="booking-card" size="lg" :variant="colored?'success':''">Add new booking</b-button>
     <b-alert v-if="bookings.length ===0" show :variant="colored?'warning':''">There are no bookings to list</b-alert>
@@ -9,6 +15,7 @@
                 :customer-name="booking.customerName" v-on:delete-booking="deleteItem(index)"
                 v-on:edit="editItem(index)"
       />
+      </div>
   </b-container>
 </template>
 
@@ -17,18 +24,24 @@ import BookCard from './BookCard.vue'
 import BookingDialog from './BookingDialog.vue'
 export default {
     props:{
-        colored:{default:false}
+
     },
   components: {
     BookCard,BookingDialog
   },data(){
       return{
+          set:false,
+          colored:false,
           bookings:[
               {date:"2019-11-19",description:"a couple with a one child",customerName:"Zammel"},
               {date:"2019-11-19",description:"a couple with a one child",customerName:"Zammel"},
           ]
       }
   },methods:{
+      setConf(colored){
+          this.colored = colored;
+          this.set = true;
+      },
       openDialog(){
           this.$refs.booking_model.openDialog();    
       },addItem(item){
