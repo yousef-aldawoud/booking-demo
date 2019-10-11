@@ -11,7 +11,7 @@
         <b-card-text>
             <strong>Booking date:-</strong> {{bookingDate}}
         </b-card-text>
-        <b-button :variant="colored?'danger':''" class=" button">delete</b-button>
+        <b-button :variant="colored?'danger':''" class=" button" @click="deleteBooking">delete</b-button>
         <b-button @click="edit" :variant="colored?'primary':''" class=" button">edit</b-button>
     </b-card>
 </template>
@@ -31,6 +31,8 @@ export default {
     },methods:{
         edit(){
             this.$emit("edit")
+        },deleteBooking(){
+            this.$emit("delete-booking")            
         }
     }
 }

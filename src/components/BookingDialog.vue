@@ -2,19 +2,19 @@
   <div>
       <b-modal v-model="open" ref="model" hide-footer title="Using Component Methods">
         <b-form-input class="field-margin"
-          v-model="bookingDetails.customerName"
+          v-model="name"
           required
           placeholder="Enter name"
         ></b-form-input>
         <b-form-textarea
         class="field-margin"
             id="textarea"
-            v-model="bookingDetails.description"
+            v-model="description"
             placeholder="Description"
             rows="3"
             max-rows="6"
         ></b-form-textarea>
-            <date-pick class="field-margin" v-model="bookingDetails.date"></date-pick>
+            <input type="date" v-model="date">
             <div>
                 <b-button :variant="colored?'danger':''" class=" button" @click="openDialog()">cancel</b-button>
                 <b-button v-if="edit" @click="editItem" :variant="colored?'primary':''" class=" button">Update</b-button>
@@ -34,6 +34,9 @@ export default {
     },
     data(){
         return{
+            name:"",
+            description:"",
+            date:"2019-01-01",
             edit:false,
             open:false,
             editIndex:0,
@@ -43,9 +46,10 @@ export default {
         }
     },methods:{
         openDialog(edit=false,details={customerName:"",date:"",description:""},index=0){
-            console.log("open")
             if(edit){
-                this.bookingDetails = details
+                this.name = details.customerName
+                this.description = details.description
+                this.date = details.date
                 this.editIndex = index
                 this.edit = true;
             }
@@ -58,10 +62,16 @@ export default {
             this.open = !this.open
         },
         editItem(){
-            this.$emit("edit-booking",this.bookingDetails,editIndex);
+            this.bookingDetails.date = this.date;
+            this.bookingDetails.customerName = this.name;
+            this.bookingDetails.description = this.description;
+            this.$emit("edit-booking",this.bookingDetails,this.editIndex);
             this.openDialog();
         },addItem(){
             this.$emit("add-booking",this.bookingDetails);
+            this.bookingDetails.date = this.date;
+            this.bookingDetails.customerName = this.name;
+            this.bookingDetails.description = this.description;
             this.openDialog();
             
         }
