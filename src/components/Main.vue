@@ -1,7 +1,8 @@
 <template>
   <b-container >
       <div v-if="!set">
-          <b-button @click="setConf(true)">Color</b-button>
+          <b-button variant="success" @click="setConf(true)">Color</b-button>
+          <br>
           <b-button @click="setConf(false)">No color</b-button>
       </div>
       <div v-else>
