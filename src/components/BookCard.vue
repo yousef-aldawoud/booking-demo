@@ -12,14 +12,14 @@
             <strong>Booking date:-</strong> {{bookingDate}}
         </b-card-text>
         <b-button :variant="colored?'danger':''" class=" button">delete</b-button>
-        <b-button :variant="colored?'primary':''" class=" button">edit</b-button>
+        <b-button @click="edit" :variant="colored?'primary':''" class=" button">edit</b-button>
     </b-card>
 </template>
 
 <script>
 export default {
     props:{
-        colored:{default:true},
+        colored:{default:false},
         description:{default:""},
         bookingDate:{default:""},
         customerName:{default:""},
@@ -27,6 +27,10 @@ export default {
     data(){
         return{
 
+        }
+    },methods:{
+        edit(){
+            this.$emit("edit")
         }
     }
 }
