@@ -50,9 +50,6 @@ export default {
       },editItem(index){
           this.$refs.booking_model.openDialog(true,this.bookings[index],index)
       },doEditItem(details,index){
-          console.log("lol")
-          console.log(index)
-          console.log(details)
             this.$delete(this.bookings, index)
             this.bookings.splice(index, 0, details);
       },deleteItem(index){
