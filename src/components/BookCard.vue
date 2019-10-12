@@ -2,7 +2,7 @@
     <b-card>
         <b-card-text>
             <h4>Customer name :- {{customerName}}</h4> 
-            <strong>Description</strong>
+            <strong>Room number</strong>
             <p>
                 {{description}}
             </p>

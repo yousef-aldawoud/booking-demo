@@ -10,7 +10,7 @@
         class="field-margin"
             id="textarea"
             v-model="description"
-            placeholder="Description"
+            placeholder="Room number"
             rows="3"
             max-rows="6"
         ></b-form-textarea>
