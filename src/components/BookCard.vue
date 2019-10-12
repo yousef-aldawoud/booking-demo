@@ -11,8 +11,8 @@
         <b-card-text>
             <strong>Booking date:-</strong> {{bookingDate}}
         </b-card-text>
-        <b-button :variant="colored?'danger':''" class=" button" @click="deleteBooking">delete</b-button>
-        <b-button @click="edit" :variant="colored?'primary':''" class=" button">edit</b-button>
+        <b-button :variant="colored?danger:''" class=" button" @click="deleteBooking">delete</b-button>
+        <b-button @click="edit" :variant="colored?primary:''" class=" button">edit</b-button>
     </b-card>
 </template>
 
@@ -20,12 +20,18 @@
 export default {
     props:{
         colored:{default:false},
+        randomColor:{default:false},
         description:{default:""},
         bookingDate:{default:""},
         customerName:{default:""},
     },
     data(){
         return{
+
+          success:this.randomColor ? "danger":"success",
+          warning:this.randomColor ? "primary":"warning",
+          danger:this.randomColor ? "success":"danger",
+          primary:this.randomColor ? "warning":"primary",
 
         }
     },methods:{

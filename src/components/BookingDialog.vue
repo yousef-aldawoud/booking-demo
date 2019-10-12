@@ -16,9 +16,9 @@
         ></b-form-textarea>
             <input type="date" v-model="date">
             <div>
-                <b-button :variant="colored?'danger':''" class=" button" @click="openDialog()">cancel</b-button>
-                <b-button v-if="edit" @click="editItem" :variant="colored?'primary':''" class=" button">Update</b-button>
-                <b-button @click="addItem" v-else :variant="colored?'success':''" class=" button">Add</b-button>
+                <b-button :variant="colored?danger:''" class=" button" @click="openDialog()">cancel</b-button>
+                <b-button v-if="edit" @click="editItem" :variant="colored?primary:''" class=" button">Update</b-button>
+                <b-button @click="addItem" v-else :variant="colored?success:''" class=" button">Add</b-button>
             </div>
       </b-modal>
   </div>
@@ -27,10 +27,15 @@
 
 export default {
     props:{
-        colored:{default:false}
+        colored:{default:false},
+        randomColor:{default:false},
     },
     data(){
         return{
+            success:this.randomColor ? "danger":"success",
+            warning:this.randomColor ? "primary":"warning",
+            danger:this.randomColor ? "success":"danger",
+            primary:this.randomColor ? "warning":"primary",
             name:"",
             description:"",
             date:"2019-01-01",

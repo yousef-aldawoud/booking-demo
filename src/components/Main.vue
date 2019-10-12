@@ -4,13 +4,17 @@
           <b-button variant="success" @click="setConf(true)">Color</b-button>
           <br>
           <b-button @click="setConf(false)">No color</b-button>
+          <br>
+          <b-button @click="setConf(true,true)">rand color</b-button>
       </div>
       <div v-else>
 
-      <booking-dialog v-on:add-booking="addItem" v-on:edit-booking="doEditItem" ref="booking_model" :colored="colored"></booking-dialog>
-      <b-button @click="openDialog" class="booking-card" size="lg" :variant="colored?'success':''">Add new booking</b-button>
-    <b-alert v-if="bookings.length ===0" show :variant="colored?'warning':''">There are no bookings to list</b-alert>
+      <booking-dialog v-on:add-booking="addItem" v-on:edit-booking="doEditItem" ref="booking_model" :colored="colored" :random-color="randomColor" ></booking-dialog>
+      <b-button @click="openDialog" class="booking-card" size="lg" v-if="!randomColor" :variant="colored?'success':''">Add new booking</b-button>
+      <b-button @click="openDialog" class="booking-card" size="lg" v-else :variant="colored?'danger':''">Adds new booking</b-button>
+    <b-alert v-if="bookings.length ===0" show :variant="colored?warning:''">There are no bookings to list</b-alert>
       <book-card v-for="(booking,index) in bookings" :key="index" class="booking-card"
+      :random-color="randomColor"
                 :colored="colored"
                 :description="booking.description" :booking-date="booking.date"
                 :customer-name="booking.customerName" v-on:delete-booking="deleteItem(index)"
@@ -31,6 +35,11 @@ export default {
     BookCard,BookingDialog
   },data(){
       return{
+          randomColor:false,
+          success:this.randomColor ? "danger":"success",
+          warning:this.randomColor ? "primary":"warning",
+          danger:this.randomColor ? "success":"danger",
+          primary:this.randomColor ? "warning":"primary",
           set:false,
           colored:false,
           bookings:[
@@ -39,9 +48,10 @@ export default {
           ]
       }
   },methods:{
-      setConf(colored){
+      setConf(colored,rand=false){
           this.colored = colored;
           this.set = true;
+          this.randomColor = rand
       },
       openDialog(){
           this.$refs.booking_model.openDialog();    
