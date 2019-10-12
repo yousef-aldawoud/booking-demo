@@ -32,10 +32,10 @@ export default {
     },
     data(){
         return{
-            success:this.randomColor ? "danger":"success",
-            warning:this.randomColor ? "primary":"warning",
-            danger:this.randomColor ? "success":"danger",
-            primary:this.randomColor ? "warning":"primary",
+            success:this.randomColor ? "warning":"success",
+            warning:this.randomColor ? "success":"warning",
+            danger:this.randomColor ? "primary":"danger",
+            primary:this.randomColor ? "danger":"primary",
             name:"",
             description:"",
             date:"2019-01-01",
