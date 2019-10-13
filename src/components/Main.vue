@@ -43,8 +43,6 @@ export default {
           set:false,
           colored:false,
           bookings:[
-              {date:"2019-11-19",description:"a couple with a one child",customerName:"Zammel"},
-              {date:"2019-11-19",description:"a couple with a one child",customerName:"Zammel"},
           ]
       }
   },methods:{
